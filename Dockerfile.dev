@@ -1,0 +1,11 @@
+# docker build -f Dockerfile.dev .
+FROM node:alpine as dependencies
+
+WORKDIR '/app'
+
+COPY ./package.json .
+RUN npm install
+
+COPY . . 
+FROM dependencies as devserv
+CMD ["npm", "run", "start"]
